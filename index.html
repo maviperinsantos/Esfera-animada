@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esfera no Hiperespaço</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #0a111a 0%, #000000 100%);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Camada de estrelas pequenas e distantes */
+        .estrelas-camada {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            background: transparent;
+            /* Gerando dezenas de estrelas via box-shadow */
+            box-shadow: 
+                10vw 5vh #fff, 25vw 15vh #fff, 40vw 10vh #fff, 60vw 5vh #fff, 85vw 12vh #fff,
+                5vw 30vh #fff, 20vw 45vh #fff, 35vw 35vh #fff, 55vw 40vh #fff, 75vw 30vh #fff,
+                15vw 60vh #fff, 30vw 75vh #fff, 50vw 65vh #fff, 70vw 70vh #fff, 95vw 65vh #fff,
+                12vw 85vh #fff, 28vw 95vh #fff, 45vw 88vh #fff, 65vw 92vh #fff, 88vw 80vh #fff,
+                2vw 20vh #fff, 18vw 12vh #fff, 33vw 55vh #fff, 48vw 25vh #fff, 68vw 18vh #fff,
+                72vw 55vh #fff, 82vw 88vh #fff, 92vw 42vh #fff, 58vw 78vh #fff, 38vw 98vh #fff;
+            opacity: 0.6;
+            animation: brilhoEstelar 3s infinite alternate;
+        }
+
+        /* Estrelas maiores e mais brilhantes */
+        body::after {
+            content: "";
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 
+                15vw 25vh #fff, 45vw 55vh #fff, 75vw 15vh #fff, 
+                85vw 75vh #fff, 25vw 85vh #fff, 55vw 5vh #fff,
+                10vw 90vh #fff, 95vw 10vh #fff, 50vw 50vh #fff;
+            filter: blur(0.5px);
+            animation: brilhoEstelar 2s infinite alternate-reverse;
+        }
+
+        .esfera {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            position: absolute;
+            cursor: pointer;
+            z-index: 10;
+
+            /* Esfera com iluminação 3D */
+            background: radial-gradient(circle at 30% 30%, #ffffff, #ff0044);
+            box-shadow: inset -15px -15px 40px rgba(0,0,0,0.9),
+                        0 0 30px rgba(255, 255, 255, 0.2);
+
+            /* Animações combinadas */
+            animation: 
+                moverX 7s linear infinite alternate, 
+                moverY 4.5s linear infinite alternate,
+                arcoIris 3s linear infinite;
+            
+            transition: transform 0.3s ease;
+        }
+
+        .esfera:hover {
+            animation-play-state: paused;
+            transform: scale(1.4);
+            filter: brightness(1.4) saturate(1.8);
+            box-shadow: 0 0 80px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Efeito de cores infinitas */
+        @keyframes arcoIris {
+            from { filter: hue-rotate(0deg); }
+            to { filter: hue-rotate(360deg); }
+        }
+
+        /* Estrelas piscando */
+        @keyframes brilhoEstelar {
+            from { opacity: 0.3; }
+            to { opacity: 0.9; }
+        }
+
+        @keyframes moverX {
+            from { left: 0%; }
+            to { left: calc(100% - 130px); }
+        }
+
+        @keyframes moverY {
+            from { top: 0%; }
+            to { top: calc(100% - 130px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="estrelas-camada"></div>
+    <div class="esfera"></div>
+
+</body>
+</html>

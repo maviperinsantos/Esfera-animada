@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505;
+    overflow: hidden; /* Impede barras de rolagem */
+    position: relative;
+}
+
+.esfera {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    cursor: pointer;
+
+    /* Estilo da Esfera */
+    background: radial-gradient(circle at 30% 30%, #ffffff, #0077ff);
+    box-shadow: inset -10px -10px 40px rgba(0,0,0,0.8),
+                0 0 20px rgba(0, 119, 255, 0.4);
+
+    /* Animação de Movimento: quica na tela */
+    animation: moverX 5s linear infinite alternate, 
+               moverY 3.4s linear infinite alternate;
+    
+    transition: transform 0.2s ease;
+}
+
+/* Quando o mouse passa, a esfera brilha e muda de cor */
+.esfera:hover {
+    animation-play-state: paused; /* A esfera para quando você tenta pegá-la! */
+    filter: hue-rotate(180deg) brightness(1.2);
+    transform: scale(1.2);
+}
+
+/* Animação para o eixo X (Esquerda/Direita) */
+@keyframes moverX {
+    from { left: 0%; }
+    to { left: calc(100% - 150px); }
+}
+
+/* Animação para o eixo Y (Cima/Baixo) */
+@keyframes moverY {
+    from { top: 0%; }
+    to { top: calc(100% - 150px); }
+}
